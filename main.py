@@ -12,8 +12,10 @@ from bot import bot
 def start(message):
     create_user(message.from_user.id)
     markup = get_keyboard_for_user(message.from_user.id)
-    bot.send_message(message.from_user.id, "Это бот для получения потребительских кредитов от РХБ\n"
-                                           "", reply_markup=markup)
+    bot.send_message(message.from_user.id,
+                     "Это бот для получения потребительских кредитов от РХБ, вам нужно заполнить все поля формы "
+                     "перед тем, как её отправить\n"
+                     "", reply_markup=markup)
 
 
 @bot.message_handler(content_types=["text"])
@@ -96,10 +98,12 @@ def main(message):
         user_id = message.from_user.id
         send_info_to_backend()
         if not all(get_checked_dict(user_id).values()):
-            bot.send_message(user_id, "Вы заполнили не всё, добейтесь появления галочек на всех иконках", reply_markup=get_keyboard_for_user(message.from_user.id))
+            bot.send_message(user_id, "Вы заполнили не всё, добейтесь появления галочек на всех иконках",
+                             reply_markup=get_keyboard_for_user(message.from_user.id))
         else:
             bot.send_message(user_id,
-                         "Бот сделал вид, что отправил заявку, он пока так не умеет, но может быть когда-нибудь сможет.", reply_markup=get_keyboard_for_user(message.from_user.id))
+                             "Бот сделал вид, что отправил заявку, он пока так не умеет, но может быть когда-нибудь сможет.",
+                             reply_markup=get_keyboard_for_user(message.from_user.id))
 
 
 @cancel_check
