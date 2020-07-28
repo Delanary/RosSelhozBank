@@ -1,0 +1,4 @@
+./config.py
+./logs/*.log
+# Project exclude paths
+/venv/
